@@ -1,0 +1,3 @@
+[submodule "backend/Flask-Ảchitecture"]
+	path = backend/Flask-Ảchitecture
+	url = https://github.com/ChienNguyensrdn/Flask-CleanArchitecture.git
