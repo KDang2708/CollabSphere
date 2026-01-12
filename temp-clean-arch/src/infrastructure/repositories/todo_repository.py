@@ -15,7 +15,7 @@ from infrastructure.databases.factory_database import FactoryDatabase as db_fact
 load_dotenv()
 
 class TodoRepository(ITodoRepository):
-    def __init__(self, session: Session = db_factory.get_database('POSTGREE').session):
+    def __init__(self, session: Session = db_factory.get_database('MSSQL').session):
         self._todos = []
         self._id_counter = 1
         self.session = db_factory.get_database('POSTGREE').session
