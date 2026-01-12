@@ -11,3 +11,5 @@ fastapi
 apispec
 apispec_webframeworks
 flask-swagger-ui
+psycopg2-binary>=2.9.3
+
