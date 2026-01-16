@@ -9,7 +9,7 @@
 #- Su dung SQLAlchemy session de tuong tac voi database
 #- Anh xa Meeting entity sang MeetingModel de luu tru
 #- Khong chua logic nghiep vu
-#- Khong xu ly request/response HTTP
+
 from domain.models.imeet_repository import IMeetRepository
 from domain.models.meet import Meeting
 from typing import List, Optional

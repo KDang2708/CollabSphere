@@ -1,3 +1,4 @@
+#imeet_repository - Giao diện repository cho entity Meeting
 from abc import ABC, abstractmethod
 from .meet import Meeting
 from typing import Optional

@@ -14,7 +14,6 @@
 #yeu cau:
 #- Chi Goi Service Va Tra Ve Response 
 #- khong Truy Cap Database truc tiep
-#- khong chua logic nghiep vu
 from flask import Blueprint, request, jsonify
 from services.meet_service import MeetingService
 from infrastructure.repositories.todo_repository import TodoRepository

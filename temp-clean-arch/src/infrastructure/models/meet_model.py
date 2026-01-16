@@ -9,7 +9,7 @@
 # <<subsystem>> Cuoc Hop
 
 #Thuoc tinh:
-# start_time: date + time (Khoa chinh) -> ThoiGianBatDau (yyyy-mm-dd)
+# start_time: date + time (Khoa chinh) -> ThoiGianBatDau 
 # created_at: str(10) (khoa ngoai) -> IDNguoiTao 
 # class_id: str(10) (khoa ngoai) -> IDLopHoc
 # group_id: str(10) (khoa ngoai) -> IDNhom

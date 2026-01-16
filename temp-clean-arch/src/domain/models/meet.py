@@ -1,4 +1,4 @@
-# meet đê lưu trữ thông tin về một cuộc họp
+# meet đê lưu trữ thông tin về một cuộc họp trong hệ thống
 class Meeting:
     def __init__(self, id: int, start_time: str, created_at: str, class_id: str, group_id: str):
         self.id = id
