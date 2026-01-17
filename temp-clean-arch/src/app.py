@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 # from api.routes import register_routes
+from flask import Flask, render_template
 from api.swagger import spec
 from api.controllers.todo_controller import bp as todo_bp
 from api.controllers.auth_controller import auth_bp as auth_bp
@@ -13,7 +14,8 @@ from flask_swagger_ui import get_swaggerui_blueprint
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, 
+                template_folder='templates')
     Swagger(app)
     # Đăng ký blueprint trước
     app.register_blueprint(todo_bp)
@@ -34,6 +36,12 @@ def create_app():
     except Exception as e:
         print(f"Error initializing database: {e}")
 
+
+    # Giao diện login.html
+    @app.route('/')
+    @app.route('/login')
+    def login_page():
+        return render_template('login.html')
     # Register middleware
     middleware(app)
 
@@ -51,6 +59,7 @@ def create_app():
         return jsonify(spec.to_dict())
 
     return app
+
 # Run the application
 
 if __name__ == '__main__':
