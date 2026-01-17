@@ -1,4 +1,3 @@
-# todo để lưu trữ thông tin về một công việc cần làm
 class Todo:
     def __init__(self, id: int, title: str, description: str, status: str, created_at, updated_at):
         self.id = id
