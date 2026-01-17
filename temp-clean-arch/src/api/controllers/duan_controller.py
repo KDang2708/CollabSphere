@@ -4,68 +4,96 @@ from infrastructure.repositories.duan_repository import DuAnRepository
 from infrastructure.databases.mssql import session
 from types import SimpleNamespace
 
+# Khởi tạo Blueprint cho Dự Án
 bp = Blueprint("duan", __name__, url_prefix="/api/duan")
-service = DuAnService(DuAnRepository(session))
+
+# Khởi tạo Service
+du_an_service = DuAnService(DuAnRepository(session))
 
 
 @bp.route("/", methods=["GET"])
-def list_du_an():
-    duans = service.get_all_du_an()
+def lay_danh_sach_du_an():
+    """
+    Lấy danh sách tất cả dự án
+    """
+    danh_sach_du_an = du_an_service.get_all_du_an()
     return jsonify([
         {
-            "id": d.id,
-            "ten_du_an": d.ten_du_an,
-            "mo_ta": d.mo_ta,
-            "trang_thai": d.trang_thai
-        } for d in duans
+            "id": du_an.id,
+            "ten_du_an": du_an.ten_du_an,
+            "mo_ta": du_an.mo_ta,
+            "trang_thai": du_an.trang_thai
+        } for du_an in danh_sach_du_an
     ]), 200
 
 
-@bp.route("/<string:id>", methods=["GET"])
-def get_du_an(id):
+@bp.route("/<string:id_du_an>", methods=["GET"])
+def lay_du_an_theo_id(id_du_an):
+    """
+    Lấy thông tin dự án theo ID
+    """
     try:
-        d = service.get_du_an(id)
+        du_an = du_an_service.get_du_an(id_du_an)
         return jsonify({
-            "id": d.id,
-            "ten_du_an": d.ten_du_an,
-            "mo_ta": d.mo_ta,
-            "trang_thai": d.trang_thai
+            "id": du_an.id,
+            "ten_du_an": du_an.ten_du_an,
+            "mo_ta": du_an.mo_ta,
+            "trang_thai": du_an.trang_thai
         }), 200
-    except ValueError as e:
-        return jsonify({"message": str(e)}), 404
+    except ValueError as loi:
+        return jsonify({"message": str(loi)}), 404
 
 
 @bp.route("/", methods=["POST"])
-def create_du_an():
-    data = request.get_json()
+def tao_du_an():
+    """
+    Tạo dự án mới
+    """
+    du_lieu = request.get_json()
+
     payload = SimpleNamespace(
-        id=data["id"],
-        ten_du_an=data["ten_du_an"],
-        mo_ta=data.get("mo_ta", "")
+        id=du_lieu["id"],
+        ten_du_an=du_lieu["ten_du_an"],
+        mo_ta=du_lieu.get("mo_ta", "")
     )
-    duan = service.create_du_an(payload)
-    return jsonify({"message": "Tạo dự án thành công", "id": duan.id}), 201
+
+    du_an = du_an_service.create_du_an(payload)
+    return jsonify({
+        "message": "Tạo dự án thành công",
+        "id": du_an.id
+    }), 201
 
 
-@bp.route("/<string:id>", methods=["PUT"])
-def update_du_an(id):
-    data = request.get_json()
+@bp.route("/<string:id_du_an>", methods=["PUT"])
+def cap_nhat_du_an(id_du_an):
+    """
+    Cập nhật thông tin dự án
+    """
+    du_lieu = request.get_json()
+
     payload = SimpleNamespace(
-        ten_du_an=data["ten_du_an"],
-        mo_ta=data.get("mo_ta", ""),
-        trang_thai=data.get("trang_thai", "DANG_THUC_HIEN")
+        ten_du_an=du_lieu["ten_du_an"],
+        mo_ta=du_lieu.get("mo_ta", ""),
+        trang_thai=du_lieu.get("trang_thai", "DANG_THUC_HIEN")
     )
-    duan = service.update_du_an(id, payload)
-    return jsonify({"message": "Cập nhật thành công"}), 200
+
+    du_an_service.update_du_an(id_du_an, payload)
+    return jsonify({"message": "Cập nhật dự án thành công"}), 200
 
 
-@bp.route("/close/<string:id>", methods=["PUT"])
-def close_du_an(id):
-    service.close_du_an(id)
+@bp.route("/close/<string:id_du_an>", methods=["PUT"])
+def dong_du_an(id_du_an):
+    """
+    Đóng dự án
+    """
+    du_an_service.close_du_an(id_du_an)
     return jsonify({"message": "Đã đóng dự án"}), 200
 
 
-@bp.route("/<string:id>", methods=["DELETE"])
-def delete_du_an(id):
-    service.delete_du_an(id)
+@bp.route("/<string:id_du_an>", methods=["DELETE"])
+def xoa_du_an(id_du_an):
+    """
+    Xóa dự án
+    """
+    du_an_service.delete_du_an(id_du_an)
     return "", 204

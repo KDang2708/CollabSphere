@@ -1,12 +1,9 @@
-from typing import List
-from .Sinh_vien import SinhVien
-
-
 class LopHoc:
-    def __init__(self, ma_lop: str, ten_lop: str):
-        self.ma_lop = ma_lop
-        self.ten_lop = ten_lop
-        self.sinh_vien: List[SinhVien] = []
+    def __init__(self, id, id_mon_hoc, si_so=0, id_giang_vien=None):
+        self.id = id
+        self.id_mon_hoc = id_mon_hoc
+        self.si_so = si_so
+        self.id_giang_vien = id_giang_vien
 
-    def them_sinh_vien(self, sinh_vien: SinhVien):
-        self.sinh_vien.append(sinh_vien)
+    def cap_nhat_si_so(self, si_so):
+        self.si_so = si_so
