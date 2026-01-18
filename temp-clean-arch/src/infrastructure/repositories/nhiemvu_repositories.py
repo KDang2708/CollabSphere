@@ -21,18 +21,16 @@ class NhiemVuRepository:
             ten_nhiem_vu=du_lieu.ten_nhiem_vu,
             mo_ta=du_lieu.mo_ta,
             trang_thai=du_lieu.trang_thai,
-            nguoi_thuc_hien=du_lieu.nguoi_thuc_hien,
-            created_at=du_lieu.created_at,
-            updated_at=du_lieu.updated_at
+            nguoi_thuc_hien=du_lieu.nguoi_thuc_hien
         )
         try:
             self.session.add(nhiem_vu)
             self.session.commit()
             self.session.refresh(nhiem_vu)
             return nhiem_vu
-        except Exception as e:
+        except Exception:
             self.session.rollback()
-            raise e
+            raise
 
     # ===============================
     # LẤY NHIỆM VỤ THEO ID
@@ -68,15 +66,14 @@ class NhiemVuRepository:
         nhiem_vu.mo_ta = du_lieu.mo_ta
         nhiem_vu.trang_thai = du_lieu.trang_thai
         nhiem_vu.nguoi_thuc_hien = du_lieu.nguoi_thuc_hien
-        nhiem_vu.updated_at = du_lieu.updated_at
 
         try:
             self.session.commit()
             self.session.refresh(nhiem_vu)
             return nhiem_vu
-        except Exception as e:
+        except Exception:
             self.session.rollback()
-            raise e
+            raise
 
     # ===============================
     # PHÂN CÔNG NHIỆM VỤ
@@ -90,9 +87,9 @@ class NhiemVuRepository:
             nhiem_vu.nguoi_thuc_hien = nguoi_thuc_hien
             nhiem_vu.trang_thai = "DA_PHAN_CONG"
             self.session.commit()
-        except Exception as e:
+        except Exception:
             self.session.rollback()
-            raise e
+            raise
 
     # ===============================
     # CẬP NHẬT TRẠNG THÁI
@@ -105,9 +102,9 @@ class NhiemVuRepository:
         try:
             nhiem_vu.trang_thai = trang_thai
             self.session.commit()
-        except Exception as e:
+        except Exception:
             self.session.rollback()
-            raise e
+            raise
 
     # ===============================
     # XÓA NHIỆM VỤ
@@ -120,6 +117,6 @@ class NhiemVuRepository:
         try:
             self.session.delete(nhiem_vu)
             self.session.commit()
-        except Exception as e:
+        except Exception:
             self.session.rollback()
-            raise e
+            raise
