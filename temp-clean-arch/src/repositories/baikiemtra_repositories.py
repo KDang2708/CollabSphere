@@ -1,3 +1,6 @@
+from sqlalchemy.orm import Session
+from typing import List, Optional
+from infrastructure.models.baikiemtra_model import BaiKiemTraModel 
 class BaiKiemTraRepository:
     """
     Repository xử lý dữ liệu Bài Kiểm Tra

@@ -1,107 +1,61 @@
-from typing import List, Optional
-from sqlalchemy.orm import Session
+from datetime import datetime
 from infrastructure.models.baikiemtra_model import BaiKiemTraModel
-from infrastructure.databases.mssql import session
+from infrastructure.repositories.baikiemtra_repository import BaiKiemTraRepository
 
 
-class BaiKiemTraRepositories:
-    """
-    Repository xử lý truy cập CSDL cho Bài Kiểm Tra
-    """
+class BaiKiemTraService:
+    def __init__(self, repository: BaiKiemTraRepository = None):
+        self.repository = repository or BaiKiemTraRepository()
 
-    def __init__(self, session: Session = session):
-        self.session = session
-
-    # ===============================
-    # THÊM BÀI KIỂM TRA
-    # ===============================
-    def them_bai_kiem_tra(self, du_lieu_bai_kiem_tra) -> BaiKiemTraModel:
-        try:
-            bai_kiem_tra = BaiKiemTraModel(
-                id=du_lieu_bai_kiem_tra.id,
-                id_du_an=du_lieu_bai_kiem_tra.id_du_an,
-                ten_bai_kiem_tra=du_lieu_bai_kiem_tra.ten_bai_kiem_tra,
-                mo_ta=du_lieu_bai_kiem_tra.mo_ta,
-                thoi_gian_lam_bai=du_lieu_bai_kiem_tra.thoi_gian_lam_bai,
-                trang_thai=du_lieu_bai_kiem_tra.trang_thai,
-                created_at=du_lieu_bai_kiem_tra.created_at,
-                updated_at=du_lieu_bai_kiem_tra.updated_at
-            )
-            self.session.add(bai_kiem_tra)
-            self.session.commit()
-            self.session.refresh(bai_kiem_tra)
-            return bai_kiem_tra
-        except Exception:
-            self.session.rollback()
-            raise ValueError("Không thể thêm bài kiểm tra")
-        finally:
-            self.session.close()
-
-    # ===============================
-    # LẤY BÀI KIỂM TRA THEO ID
-    # ===============================
-    def lay_theo_id(self, id_bai_kiem_tra: str) -> Optional[BaiKiemTraModel]:
-        return (
-            self.session
-            .query(BaiKiemTraModel)
-            .filter_by(id=id_bai_kiem_tra)
-            .first()
+    # 1. Tạo bài kiểm tra
+    def create_bai_kiem_tra(self, data) -> BaiKiemTraModel:
+        bai_kt = BaiKiemTraModel(
+            id=data.id,
+            id_du_an=data.id_du_an,
+            ten_bai_kiem_tra=data.ten_bai_kiem_tra,
+            mo_ta=data.mo_ta,
+            thoi_gian_lam_bai=data.thoi_gian_lam_bai,
+            trang_thai="MOI_TAO",
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
         )
+        return self.repository.them_bai_kiem_tra(bai_kt)
 
-    # ===============================
-    # LẤY DANH SÁCH BÀI KIỂM TRA THEO DỰ ÁN
-    # ===============================
-    def danh_sach_theo_du_an(self, id_du_an: str) -> List[BaiKiemTraModel]:
-        return (
-            self.session
-            .query(BaiKiemTraModel)
-            .filter_by(id_du_an=id_du_an)
-            .all()
-        )
+    # 2. Lấy bài kiểm tra theo ID
+    def get_bai_kiem_tra(self, id: str) -> BaiKiemTraModel:
+        bai_kt = self.repository.lay_theo_id(id)
+        if not bai_kt:
+            raise ValueError("Không tìm thấy bài kiểm tra")
+        return bai_kt
 
-    # ===============================
-    # CẬP NHẬT BÀI KIỂM TRA
-    # ===============================
-    def cap_nhat_bai_kiem_tra(self, du_lieu_bai_kiem_tra) -> BaiKiemTraModel:
-        try:
-            bai_kiem_tra = BaiKiemTraModel(
-                id=du_lieu_bai_kiem_tra.id,
-                id_du_an=du_lieu_bai_kiem_tra.id_du_an,
-                ten_bai_kiem_tra=du_lieu_bai_kiem_tra.ten_bai_kiem_tra,
-                mo_ta=du_lieu_bai_kiem_tra.mo_ta,
-                thoi_gian_lam_bai=du_lieu_bai_kiem_tra.thoi_gian_lam_bai,
-                trang_thai=du_lieu_bai_kiem_tra.trang_thai,
-                created_at=du_lieu_bai_kiem_tra.created_at,
-                updated_at=du_lieu_bai_kiem_tra.updated_at
-            )
-            self.session.merge(bai_kiem_tra)
-            self.session.commit()
-            return bai_kiem_tra
-        except Exception:
-            self.session.rollback()
-            raise ValueError("Không thể cập nhật bài kiểm tra")
-        finally:
-            self.session.close()
+    # 3. Danh sách bài kiểm tra theo dự án
+    def get_by_du_an(self, id_du_an: str):
+        return self.repository.danh_sach_theo_du_an(id_du_an)
 
-    # ===============================
-    # XÓA BÀI KIỂM TRA
-    # ===============================
-    def xoa_bai_kiem_tra(self, id_bai_kiem_tra: str) -> None:
-        try:
-            bai_kiem_tra = (
-                self.session
-                .query(BaiKiemTraModel)
-                .filter_by(id=id_bai_kiem_tra)
-                .first()
-            )
+    # 4. Cập nhật bài kiểm tra
+    def update_bai_kiem_tra(self, id: str, data):
+        bai_kt = self.repository.lay_theo_id(id)
+        if not bai_kt:
+            raise ValueError("Không tìm thấy bài kiểm tra")
 
-            if not bai_kiem_tra:
-                raise ValueError("Bài kiểm tra không tồn tại")
+        bai_kt.ten_bai_kiem_tra = data.ten_bai_kiem_tra
+        bai_kt.mo_ta = data.mo_ta
+        bai_kt.thoi_gian_lam_bai = data.thoi_gian_lam_bai
+        bai_kt.trang_thai = data.trang_thai
+        bai_kt.updated_at = datetime.utcnow()
 
-            self.session.delete(bai_kiem_tra)
-            self.session.commit()
-        except Exception:
-            self.session.rollback()
-            raise ValueError("Không thể xóa bài kiểm tra")
-        finally:
-            self.session.close()
+        return self.repository.cap_nhat_bai_kiem_tra(bai_kt)
+
+    # 5. Đóng bài kiểm tra
+    def close_bai_kiem_tra(self, id: str):
+        bai_kt = self.repository.lay_theo_id(id)
+        if not bai_kt:
+            raise ValueError("Không tìm thấy bài kiểm tra")
+
+        bai_kt.trang_thai = "DA_DONG"
+        bai_kt.updated_at = datetime.utcnow()
+        return self.repository.cap_nhat_bai_kiem_tra(bai_kt)
+
+    # 6. Xóa bài kiểm tra
+    def delete_bai_kiem_tra(self, id: str):
+        self.repository.xoa_bai_kiem_tra(id)
