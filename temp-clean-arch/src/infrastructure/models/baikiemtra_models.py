@@ -1,6 +1,6 @@
-from sqlalchemy.orm import Session
+from sqlalchemy import Session
 from typing import List, Optional
-from infrastructure.models.baikiemtra_model import BaiKiemTraModel
+from infrastructure.models.baikiemtra_models import BaiKiemTraModel
 
 class BaiKiemTraRepository:
     def __init__(self, session: Session):
