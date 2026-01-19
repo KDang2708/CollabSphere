@@ -1,5 +1,5 @@
-from infrastructure.repositories.nhiemvu_repository import NhiemVuRepository
-from infrastructure.models.nhiemvu_model import NhiemVuModel
+from infrastructure.repositories.nhiemvu_repositories import NhiemVuRepository
+from infrastructure.models.nhiemvu_models import NhiemVuModel
 
 
 class NhiemVuService:

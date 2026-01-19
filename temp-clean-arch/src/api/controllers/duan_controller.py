@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from services.duan_service import DuAnService
-from infrastructure.repositories.duan_repository import DuAnRepository
+from services.duan_services import DuAnService
+from infrastructure.repositories.duan_repositories import DuAnRepository
 from infrastructure.databases.mssql import session
 from types import SimpleNamespace
 from datetime import datetime

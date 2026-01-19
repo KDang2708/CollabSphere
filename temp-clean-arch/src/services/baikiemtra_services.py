@@ -1,6 +1,6 @@
 from datetime import datetime
-from infrastructure.models.baikiemtra_model import BaiKiemTraModel
-from infrastructure.repositories.baikiemtra_repository import BaiKiemTraRepository
+from infrastructure.models.baikiemtra_models import BaiKiemTraModel
+from infrastructure.repositories.baikiemtra_repositories import BaiKiemTraRepository
 
 
 class BaiKiemTraService:

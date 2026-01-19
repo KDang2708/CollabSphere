@@ -13,20 +13,3 @@ def init_db(app):
     
 # Migration Entities -> tables
 from infrastructure.databases.mssql import Base
-Base.metadata.create_all()(bind=FactoryDatabase.get_database('MSSQL').engine)
-from infrastructure.databases.postgres import Base as PostgresBase  
-PostgresBase.metadata.create_all()(bind=FactoryDatabase.get_database('POSTGREE').engine)
-def get_db_session(db_type):
-    if db_type == 'MSSQL':
-        return FactoryDatabase.get_database('MSSQL').get_session()
-    elif db_type == 'POSTGREE':
-        return FactoryDatabase.get_database('POSTGREE').get_session()
-    else:
-        raise ValueError(f"Unsupported database type: {db_type}")
-def get_db_engine(db_type):
-    if db_type == 'MSSQL':
-        return FactoryDatabase.get_database('MSSQL').engine
-    elif db_type == 'POSTGREE':
-        return FactoryDatabase.get_database('POSTGREE').engine
-    else:
-        raise ValueError(f"Unsupported database type: {db_type}")    

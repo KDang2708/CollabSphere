@@ -1,6 +1,6 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from infrastructure.models.duan_model import DuAnModel
+from infrastructure.models.duan_models import DuAnModel
 
 
 class DuAnRepository:

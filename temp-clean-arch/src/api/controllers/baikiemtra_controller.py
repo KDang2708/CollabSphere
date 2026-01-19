@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from services.baikiemtra_service import BaiKiemTraService
-from infrastructure.repositories.baikiemtra_repository import BaiKiemTraRepository
+from services.baikiemtra_services import BaiKiemTraService
+from infrastructure.repositories.baikiemtra_repositories import BaiKiemTraRepository
 from infrastructure.databases.mssql import session
 from types import SimpleNamespace
 from datetime import datetime

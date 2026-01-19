@@ -1,5 +1,4 @@
 
-
 from infrastructure.databases.abstract_database import AbstractDatabase
 import psycopg2
 from psycopg2 import sql

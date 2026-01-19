@@ -1,6 +1,6 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from infrastructure.models.nhiemvu_model import NhiemVuModel
+from infrastructure.models.nhiemvu_models import NhiemVuModel
 
 
 class NhiemVuRepository:

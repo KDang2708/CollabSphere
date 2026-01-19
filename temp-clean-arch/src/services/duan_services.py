@@ -1,5 +1,5 @@
-from infrastructure.repositories.duan_repository import DuAnRepository
-from infrastructure.models.duan_model import DuAnModel
+from infrastructure.repositories.duan_repositories import DuAnRepository
+from infrastructure.models.duan_models import DuAnModel
 
 
 class DuAnService:

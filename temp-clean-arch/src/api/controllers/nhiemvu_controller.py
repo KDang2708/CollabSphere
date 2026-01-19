@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from services.nhiemvu_service import NhiemVuService
-from infrastructure.repositories.nhiemvu_repository import NhiemVuRepository
+from services.nhiemvu_services import NhiemVuService
+from infrastructure.repositories.nhiemvu_repositories import NhiemVuRepository
 from infrastructure.databases.mssql import session
 from types import SimpleNamespace
 from datetime import datetime
