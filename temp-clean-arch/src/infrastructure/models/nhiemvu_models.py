@@ -1,25 +1,22 @@
-from sqlalchemy import Column, String, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, Date
 from infrastructure.databases.base import Base
-from datetime import datetime
 
 
 class NhiemVuModel(Base):
     __tablename__ = "nhiemvu"
     __table_args__ = {"extend_existing": True}
 
-    id = Column(String(50), primary_key=True)
-    id_du_an = Column(String(50), ForeignKey("duan.id"), nullable=False)
-    ten_nhiem_vu = Column(String(255), nullable=False)
-    mo_ta = Column(String(500))
-    trang_thai = Column(String(50), default="MOI_TAO")
-    nguoi_thuc_hien = Column(String(50))
+    # IDNhiemVu - Khóa chính
+    id = Column("IDNhiemVu", String(10), primary_key=True)
 
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    # IDNguoiThucHien - Khóa ngoại
+    id_nguoi_thuc_hien = Column("IDNguoiThucHien", String(10), nullable=False)
 
-    # Nhiệm vụ thuộc về một dự án
-    du_an = relationship(
-        "DuAnModel",
-        back_populates="nhiem_vu"
-    )
+    # NgayBatDau
+    ngay_bat_dau = Column("NgayBatDau", Date, nullable=True)
+
+    # NgayKetThuc
+    ngay_ket_thuc = Column("NgayKetThuc", Date, nullable=True)
+
+    # IDNguoiTao - Khóa ngoại
+    id_nguoi_tao = Column("IDNguoiTao", String(10), nullable=False)

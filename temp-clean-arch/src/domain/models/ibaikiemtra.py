@@ -1,30 +1,24 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
-from domain.models.baikiemtra import BaiKiemTra
-
+from baikiemtra import BaiKiemTra
 
 class IBaiKiemTraRepository(ABC):
-
     @abstractmethod
-    def them(self, bai_kiem_tra: BaiKiemTra) -> BaiKiemTra:
+    def create_bai_kiem_tra(self, bai_kiem_tra: BaiKiemTra) -> BaiKiemTra:
         pass
 
     @abstractmethod
-    def lay_theo_id(self, id_bai_kiem_tra: str) -> Optional[BaiKiemTra]:
+    def get_bai_kiem_tra_by_id(self, id: int) -> Optional[BaiKiemTra]:
         pass
 
     @abstractmethod
-    def lay_bat_buoc(self, id_bai_kiem_tra: str) -> BaiKiemTra:
+    def get_all_bai_kiem_tra(self) -> List[BaiKiemTra]:
         pass
 
     @abstractmethod
-    def danh_sach_theo_du_an(self, id_du_an: str) -> List[BaiKiemTra]:
+    def update_bai_kiem_tra(self, bai_kiem_tra: BaiKiemTra) -> BaiKiemTra:
         pass
 
     @abstractmethod
-    def cap_nhat(self, bai_kiem_tra: BaiKiemTra) -> BaiKiemTra:
-        pass
-
-    @abstractmethod
-    def xoa(self, id_bai_kiem_tra: str) -> None:
+    def delete_bai_kiem_tra(self, id: int) -> None:
         pass

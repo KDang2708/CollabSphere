@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import session
 from typing import List, Optional
 
 from domain.models.baikiemtra import BaiKiemTra
