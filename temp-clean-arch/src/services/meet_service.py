@@ -17,26 +17,27 @@
 from domain.models.meet import Meeting
 from domain.models.imeet_repository import IMeetRepository
 from typing import List, Optional
+from sqlalchemy import DateTime
 
 class MeetingService:
     def __init__(self, meet_repository: IMeetRepository):
         self.meet_repository = meet_repository
 
-    def create_meeting(self, start_time: str, created_at: str, class_id: str, group_id: str) -> Meeting:
+    def create_meeting(self, ngaygui: DateTime, id_nguoitao: str, id_lop: str, id_nhom: str) -> Meeting:
         # Tạo entity Meeting
         new_meeting = Meeting(
-            id=0,  # ID sẽ được gán bởi database
-            start_time=start_time,
-            created_at=created_at,
-            class_id=class_id,
-            group_id=group_id
+            id_meet=0,  # ID sẽ được gán bởi database
+            ngaygui=ngaygui,
+            id_nguoitao=id_nguoitao,
+            id_lop=id_lop,
+            id_nhom=id_nhom
         )
         # Lưu trữ cuộc họp thông qua repository
         saved_meeting = self.meet_repository.add(new_meeting)
         return saved_meeting
 
-    def get_meeting(self, meet_id: int) -> Optional[Meeting]:
-        return self.meet_repository.get_by_id(meet_id)
+    def get_meeting(self, id_meet: int) -> Optional[Meeting]:
+        return self.meet_repository.get_by_id(id_meet)
 
     def list_meetings(self) -> List[Meeting]:
         return self.meet_repository.list()
@@ -44,5 +45,5 @@ class MeetingService:
     def update_meeting(self, meet: Meeting) -> Meeting:
         return self.meet_repository.update(meet)
 
-    def delete_meeting(self, meet_id: int) -> None:
-        self.meet_repository.delete(meet_id)
+    def delete_meeting(self, id_meet: int) -> None:
+        self.meet_repository.delete(id_meet)
