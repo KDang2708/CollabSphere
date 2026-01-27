@@ -6,10 +6,10 @@ class DuAn():
     def __init__(
             self,
             id : str, 
-            noi_dung: str, 
-            nguoi_tao: GiangVien, 
-            lop_hoc : LopHoc, 
-            trang_thai : bool 
+            noi_dung: str,
+            trang_thai : bool, 
+            nguoi_tao: GiangVien| None , 
+            lop_hoc : LopHoc| None  
         ):#hàm khởi tạo
         self.id = id
         self.noi_dung = noi_dung

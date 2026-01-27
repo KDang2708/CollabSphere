@@ -14,9 +14,9 @@ class IDuAn(ABC):
     def get_all(self) -> List[DuAn]:
         pass
 
-    # @abstractmethod
-    # def set_lop(self) -> (self, du_an : DuAn , lop_hoc = LopHoc)->DuAn:
-    #     pass
+    @abstractmethod
+    def update_trang_thai(self, id: str, trang_thai: bool) -> Optional[DuAn]:
+        pass
 
 
    

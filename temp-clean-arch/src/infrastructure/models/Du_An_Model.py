@@ -16,7 +16,7 @@
 #         self.nguoi_tao = nguoi_tao
 #         self.lop_hoc = lop_hoc
 from infrastructure.databases.base import Base
-from sqlalchemy import Column, String, ForeignKey, Boolean, Text
+from sqlalchemy import Column, String, ForeignKey, Boolean
 import uuid
 class DuAnORM(Base):
     __tablename__ = "du_an"
