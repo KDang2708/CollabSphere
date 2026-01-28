@@ -12,3 +12,11 @@ class UserModel(Base):
     status = Column(Boolean, nullable=False)
     created_at = Column(DateTime)
     updated_at = Column(DateTime) 
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'password': self.password,
+            'status': self.status,
+        }
