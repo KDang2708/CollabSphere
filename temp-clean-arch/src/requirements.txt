@@ -4,8 +4,8 @@ Flask-SQLAlchemy>=2.5
 SQLAlchemy>=1.4
 marshmallow>=3.0
 pymssql>=2.2
-python-dotenv>=0.21 
-Flask-RESTX>=1.1.0 
+python-dotenv>=0.21
+Flask-RESTX>=1.1.0
 flasgger
 fastapi
 apispec
@@ -13,3 +13,4 @@ apispec_webframeworks
 flask-swagger-ui
 psycopg2-binary>=2.9.3
 jwt>=1.2.0
+openai>=1.0.0

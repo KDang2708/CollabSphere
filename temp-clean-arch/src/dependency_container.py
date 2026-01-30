@@ -3,12 +3,8 @@
 from dependency_injector import containers, providers
 
 # Import your services and repositories here
-# from infrastructure.repositories import SomeRepository
-# from infrastructure.services import SomeService
+from infrastructure.services.chatgpt_ai import ChatGPTAIService
 
 class Container(containers.DeclarativeContainer):
     # Define your providers here
-    # some_repository = providers.Factory(SomeRepository)
-    # some_service = providers.Factory(SomeService, repository=some_repository)
-
-    pass  # This file is intentionally left blank for now.
+    chatgpt_ai_service = providers.Singleton(ChatGPTAIService)

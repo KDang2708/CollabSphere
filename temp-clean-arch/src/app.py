@@ -10,11 +10,16 @@ from config import Config
 from flasgger import Swagger
 from config import SwaggerConfig
 from flask_swagger_ui import get_swaggerui_blueprint
+from dependency_container import Container
 
 
 def create_app():
     app = Flask(__name__)
     Swagger(app)
+
+    # Wire the dependency container
+    container = Container()
+    container.wire(modules=[__name__])
     # Đăng ký blueprint trước
     app.register_blueprint(todo_bp)
     app.register_blueprint(auth_bp)
