@@ -1,0 +1,3 @@
+- [x] Update auth_signup_password.js to include signInWithEmailAndPassword function
+- [x] Create loginpage.jsx with email and password form
+- [x] Create App.jsx to manage authentication state and render login or home page
