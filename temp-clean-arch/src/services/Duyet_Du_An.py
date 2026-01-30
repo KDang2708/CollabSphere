@@ -1,7 +1,7 @@
 from domain.models.Du_An.Du_An import DuAn
 from domain.models.Du_An.iDu_An import IDuAn
 from domain.models.Truong_Khoa.Truong_Khoa import TruongKhoa
-from services.Xem_Du_An_Service import XemDuAnUseCase
+from services.Duyet_Du_An import XemDuAnUseCase
 
 from typing import List, Optional
 
