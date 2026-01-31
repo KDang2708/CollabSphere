@@ -1,6 +1,6 @@
 from domain.models.Bao_Cao.Bao_Cao import BaoCao
-from infrastructure.models.Bao_Cao_Model import BaoCaoORM
-from domain.models.Bao_Cao.iBao_Cao import IBaoCaoRepository
+from infrastructure.models.Bao_cao_Model import BaoCaoORM
+from domain.models.Bao_Cao.IBao_Cao import IBaoCaoRepository
 from domain.models.Tai_Khoan.Tai_Khoan import VaiTro , TaiKhoan
 from domain.models.Phan_Hoi.Phan_Hoi import PhanHoi
 from sqlalchemy.orm import Session
