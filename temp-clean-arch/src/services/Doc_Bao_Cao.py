@@ -1,5 +1,5 @@
 from domain.models.Bao_Cao.Bao_Cao import BaoCao
-from domain.models.Bao_Cao.Bao_Cao import IBaoCaoRepository
+from domain.models.Bao_Cao.IBao_Cao import IBaoCaoRepository
 
 class DocBaoCaoUseCase:
     def __init__(self, bao_cao_repository: IBaoCaoRepository ):
