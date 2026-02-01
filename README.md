@@ -1,3 +1,11 @@
+Dưới đây là phiên bản **README.md hoàn chỉnh** đã được chỉnh sửa dựa trên nội dung bạn vừa cung cấp, với các thay đổi sau:
+
+- **Bỏ hoàn toàn Docker** (xóa badge Docker, xóa phần Getting Started bằng Docker, xóa docker compose, xóa Dockerfile nếu có ngầm hiểu)
+- Giữ nguyên cấu trúc thư mục bạn gửi (không thêm alembic/, tests/, .env.example…)
+- Sửa phần cài đặt backend/frontend cho phù hợp hơn với nội dung bạn đưa (dùng `python app.py` thay uvicorn, dùng `npm` thay pnpm, thêm lệnh Windows activate)
+- Xóa các phần không cần thiết hoặc lỗi nhỏ (ví dụ FLASK_ENV không phù hợp với FastAPI, port 9999 → giữ 8000 chuẩn FastAPI)
+- Giữ nguyên ngôn ngữ, emoji, và phong cách bạn đã dùng
+
 ```markdown
 # CollabSphere (COSRE)  
 **Hệ thống hỗ trợ học tập theo phương pháp Project-Based Learning (PBL)**  
@@ -12,7 +20,6 @@
   <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.11-blue" alt="Python 3.11"></a>
   <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.115-success" alt="FastAPI"></a>
   <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-18-blue" alt="React 18"></a>
-  <a href="https://docker.com"><img src="https://img.shields.io/badge/Docker-Ready-blue" alt="Docker Ready"></a>
 </p>
 
 **CollabSphere** là nền tảng **all-in-one** dành cho giáo dục, giúp sinh viên và giảng viên quản lý, thực hiện đồ án môn học theo phương pháp **Project-Based Learning (PBL)** mà không cần chuyển đổi liên tục giữa nhiều công cụ rời rạc (Zoom, Trello, Miro, Google Docs, Slack…).
@@ -119,59 +126,58 @@ CollabSphere/
 └── README.md
 ```
 
-## 🚀 Getting Started (Docker – cách nhanh nhất)
+## 🚀 Getting Started (Development mode)
 
-Yêu cầu: Docker & Docker Compose
-
-```bash
-git clone https://github.com/your-username/CollabSphere.git
-cd CollabSphere
-
-# Sao chép file môi trường
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
-
-# Chỉnh sửa các biến cần thiết trong .env (DATABASE_URL, JWT_SECRET_KEY, REDIS_URL…)
-FLASK_ENV=development
-POSTGRES_DATABASE_URL=postgresql://postgres:collabsphere25@db.bliuqusdfagtmniwhpsy.supabase.co:5432/postgres
-SECRET_KEY=dev_secret_key
-
-
-# Khởi động toàn bộ hệ thống
-docker compose up -d --build
-```
-
-Truy cập:
-- Frontend: http://localhost:5173 (hoặc port bạn config)
-- API docs (Swagger): http://localhost:9999/docs
-
-## 🛠️ Cài đặt môi trường phát triển (Development)
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- PostgreSQL (chạy local hoặc cloud như Supabase)
+- Redis (chạy local hoặc cloud)
 
 ### Backend
 
 ```bash
 cd backend
 
+# Tạo và kích hoạt virtual environment
 python -m venv venv
-Windows: .venv\Scripts\Activate.ps1
 
-cd backend\src\
-pip install -r requirements.txt
+# Windows:
+venv\Scripts\activate
+
+# Linux/macOS:
+# source venv/bin/activate
+
+cd src
+pip install -r ../requirements.txt
+
+# Chạy ứng dụng (giả sử entry point là app.py hoặc main.py)
 python app.py
-
 ```
+
+→ API docs (Swagger): http://localhost:8000/docs (hoặc port bạn config trong app.py)
 
 ### Frontend
 
 ```bash
 cd frontend
 
-npm install    
+# Cài đặt dependencies
+npm install
 
-npm run dev       
+# Chạy dev server
+npm run dev
 ```
 
-Frontend mặc định chạy tại: http://localhost:5173
+→ Frontend chạy tại: http://localhost:5173
+
+**Lưu ý**:  
+- Cập nhật các biến môi trường trong file `.env` (hoặc `.env.local`) của backend, ví dụ:
+  ```
+  DATABASE_URL=postgresql://postgres:collabsphere25@db.bliuqusdfagtmniwhpsy.supabase.co:5432/postgres
+  SECRET_KEY=dev_secret_key
+  ```
+- Đảm bảo backend đang chạy trước khi khởi động frontend.
 
 ## 📸 Demo & Screenshots
 
@@ -195,13 +201,6 @@ Frontend mặc định chạy tại: http://localhost:5173
 
 Distributed under the **MIT License**. Xem file [LICENSE](LICENSE) để biết chi tiết.
 
-
 Cảm ơn bạn đã quan tâm đến **CollabSphere**!  
 Hy vọng dự án sẽ hỗ trợ hiệu quả cho việc học tập theo dự án tại Việt Nam và quốc tế. 🌟
 ```
-
-**Hướng dẫn sử dụng file này:**
-- Thay `your-username/CollabSphere` bằng tên repo GitHub thật của bạn.
-- Thêm ảnh chụp màn hình thực tế thay cho placeholder.
-- Nếu bạn đã đổi tên thư mục backend từ `temp-clean-arch` thành `backend`, thì cấu trúc trên đã khớp.
-- Nếu có thêm live demo (Vercel, Render, Railway…), hãy thêm link ở đầu file.
