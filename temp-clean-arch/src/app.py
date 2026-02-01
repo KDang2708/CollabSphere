@@ -1,64 +1,93 @@
-from flask import Flask, jsonify
-# from api.routes import register_routes
-from api.swagger import spec
-from api.controllers.todo_controller import bp as todo_bp
-from api.controllers.auth_controller import auth_bp as auth_bp
-from api.middleware import middleware
-from api.responses import success_response
-from infrastructure.databases import init_db
-from config import Config
-from flasgger import Swagger
-from config import SwaggerConfig
-from flask_swagger_ui import get_swaggerui_blueprint
-# from dependency_container import Container
+"""
+Ứng dụng FastAPI - khởi động với: python app.py hoặc uvicorn app:app --reload
+"""
+from contextlib import asynccontextmanager
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from api.routes import register_routes
 
 
-def create_app():
-    app = Flask(__name__)
-    Swagger(app)
+def _import_orm_models():
+    """Import tất cả ORM models để Base.metadata có đủ bảng trước khi create_all."""
+    from infrastructure import models  # noqa: F401
+    models.import_all_models()
 
-    # Wire the dependency container
-    # container = Container()
-    # container.wire(modules=[__name__])
-    
-    # Đăng ký blueprint trước
-    app.register_blueprint(todo_bp)
-    app.register_blueprint(auth_bp)
-    # register_routes(app)
-     # Thêm Swagger UI blueprint
-    SWAGGER_URL = '/docs'
-    API_URL = '/swagger.json'
-    swaggerui_blueprint = get_swaggerui_blueprint(
-        SWAGGER_URL,
-        API_URL,
-        config={'app_name': "Todo API"}
-    )
-    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Khởi tạo DB khi start (nếu có cấu hình)."""
+    _import_orm_models()
     try:
-        init_db(app)
+        from infrastructure.databases.factory_database import FactoryDatabase
+        db = FactoryDatabase.get_database("POSTGRES")
+        db.init_database(app)
     except Exception as e:
-        print(f"Error initializing database: {e}")
+        print(f"[Warning] Không khởi tạo DB (kiểm tra .env POSTGRES_DATABASE_URL): {e}")
+    yield
 
-    # Register middleware
-    middleware(app)
 
-    # Register routes
-    with app.test_request_context():
-        for rule in app.url_map.iter_rules():
-            # Thêm các endpoint khác nếu cần
-            if rule.endpoint.startswith(('todo.', 'course.', 'user.', 'auth.')):
-                view_func = app.view_functions[rule.endpoint]
-                print(f"Adding path: {rule.rule} -> {view_func}")
-                spec.path(view=view_func)
-            
-    @app.route("/swagger.json")
-    def swagger_json():
-        return jsonify(spec.to_dict())
+def create_app() -> FastAPI:
+    app = FastAPI(
+        title="API",
+        description="API quản lý",
+        version="1.0.0",
+        lifespan=lifespan,
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    register_routes(app)
+
+    @app.get("/")
+    def root():
+        return {"message": "API đang chạy", "docs": "/docs"}
 
     return app
-# Run the application
 
-if __name__ == '__main__':
-    app = create_app()
-    app.run(host='0.0.0.0', port=9999, debug=True)
+
+app = create_app()
+
+
+if __name__ == "__main__":
+    import uvicorn
+    import socket
+
+    host = "0.0.0.0"
+    port = 9999
+    
+    # Lấy địa chỉ IP thật của máy trong mạng nội bộ (optional)
+    try:
+        hostname = socket.gethostname()
+        local_ip = socket.gethostbyname(hostname)
+    except:
+        local_ip = "127.0.0.1"
+
+    print("\n" + "="*50)
+    print(f"🚀 API đang khởi động!")
+    print(f"🔗 Truy cập tại local: http://127.0.0.1:{port}")
+    print(f"🔗 Truy cập tại docs:  http://127.0.0.1:{port}/docs")
+    print(f"🌐 Truy cập qua mạng:  http://{local_ip}:{port}")
+    print("="*50 + "\n")
+
+    uvicorn.run(
+        "app:app",
+        host=host,
+        port=port,
+        reload=False,
+        log_level="info"
+    )

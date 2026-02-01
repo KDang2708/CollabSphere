@@ -7,10 +7,9 @@ from infrastructure.databases.database_postgres import DatabasePostgres
 
 class FactoryDatabase:
     @staticmethod
-    def get_database(database_type)-> AbstractDatabase:
+    def get_database(database_type) -> AbstractDatabase:
         if database_type == 'MSSQL':
             return DatabaseMSSQL()
-        if database_type == 'POSTGREE':
-            # Return PostgreSQL database instance
+        if database_type == 'POSTGRES':
             return DatabasePostgres()
-        raise ValueError(f"Unsupported database type: {database_type}") 
+        raise ValueError(f"Unsupported database type: {database_type}")

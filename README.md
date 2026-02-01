@@ -1,74 +1,184 @@
-# CollabSphere (COSRE)  
-**Hệ thống hỗ trợ học tập theo phương pháp Project-Based Learning (PBL)**  
-**A Unified Real-time Collaboration & Project Management Platform for Education**
+# Architecture
 
-<img src="https://via.placeholder.com/1200x400.png?text=CollabSphere+Banner" alt="CollabSphere Banner" />
+```bash
+    ├── migrations
+    ├── scripts
+    │   └── run_postgres.sh
+    ├── src
+    │   ├── api
+    │   │   ├── controllers
+    │   │   │   └── ...  # controllers for the api
+    │   │   ├── schemas
+    │   │   │   └── ...  # Marshmallow schemas
+    │   │   ├── middleware.py
+    │   │   ├── responses.py
+    │   │   └── requests.py
+    │   ├── infrastructure
+    │   │   ├── services
+    │   │   │   └── ...  # Services that use third party libraries or services (e.g. email service)
+    │   │   ├── databases
+    │   │   │   └── ...  # Database adapaters and initialization
+    │   │   ├── repositories
+    │   │   │   └── ...  # Repositories for interacting with the databases
+    │   │   └── models
+    │   │   │   └── ...  # Database models
+    │   ├── domain
+    │   │   ├── constants.py
+    │   │   ├── exceptions.py
+    │   │   ├── models
+    │   │   │   └── ...  # Business logic models
+    │   ├── services
+    │   │    └── ...  # Services for interacting with the domain (business logic)
+    │   ├── app.py
+    │   ├── config.py
+    │   ├── cors.py
+    │   ├── create_app.py
+    │   ├── dependency_container.py
+    │   ├── error_handler.py
+    │   └── logging.py
+```
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11-blue)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-success)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](https://docker.com)
+## Domain Layer
 
-## Giới thiệu dự án
-CollabSphere là hệ thống **all-in-one** giúp sinh viên và giảng viên quản lý, thực hiện đồ án môn học theo phương pháp **Project-Based Learning** mà không cần chuyển qua lại giữa nhiều công cụ rời rạc (Zoom, Trello, Miro, Google Docs, Slack…).
+## Services Layer
 
-Tất cả trong một nơi:
-- Video call + Screen sharing  
-- Chat nhóm & chat trong meeting  
-- Bảng trắng (Whiteboard) cộng tác real-time  
-- Task board (Kanban) + Sprint + Subtask  
-- Quản lý milestone & checkpoint  
-- Đánh giá chéo (peer review) & góp ý từ giảng viên  
-- AI hỗ trợ gợi ý ý tưởng & sinh milestone  
-- Import Excel tự động (lớp, sinh viên, môn học…)
+## Infrastructure Layer
 
-## Các vai trò trong hệ thống
-| Vai trò            | Mô tả ngắn gọn                              |
-|--------------------|---------------------------------------------|
-| **Admin**          | Quản trị toàn hệ thống                      |
-| **Staff**          | Nhập dữ liệu (môn, lớp, tài khoản) bằng Excel |
-| **Head Department**| Duyệt đề tài, phân bổ đề tài cho lớp        |
-| **Lecturer**       | Tạo đề tài, quản lý nhóm, chấm điểm         |
-| **Student**        | Làm việc nhóm, cập nhật tiến độ, đánh giá chéo |
+## Download source code (CMD)
+    git clone https://github.com/ChienNguyensrdn/Flask-CleanArchitecture.git
+## Kiểm tra đã cài python đã cài đặt trên máy chưa
+    python --version
+## Run app
 
-## Tính năng chính
-| Module                              | Tính năng nổi bật                                                                 |
-|-------------------------------------|------------------------------------------------------------------------------------|
-| Subject & Class Management          | Import Excel → tự động tạo môn, lớp, tài khoản                                    |
-| Project Management                  | Tạo đề tài + AI sinh milestone tự động + duyệt đề tài                             |
-| Teams & Workspace                   | Kanban board, sprint, subtask, checkpoint, contribution tracking                 |
-| Real-time Communication            | Video call (WebRTC), chat nhóm, lịch họp, thông báo real-time                     |
-| Collaborative Tools                 | Whiteboard, đồng thời chỉnh sửa tài liệu                                         |
-| Resource Management                 | Upload/download tài liệu lớp và nhóm                                              |
-| Evaluation & Feedback               | Đánh giá nhóm/cá nhân, peer review, góp ý chi tiết                               |
-| AI-Powered Assistant                | Chatbot hỗ trợ ý tưởng, sinh thông tin đề tài                                     |
-| Notification System                 | Email + real-time notification (bell icon)                                        |
+ - Bước 1: Tạo môi trường ảo co Python (phiên bản 3.x)
+     ## Windows:
+     		py -m venv .venv
+     ## Unix/MacOS:
+     		python3 -m venv .venv
+   - Bước 2: Kích hoạt môi trường:
+     ## Windows:
+     		.venv\Scripts\activate.ps1
+     ### Nếu xảy ra lỗi active .venv trên winos run powershell -->Administrator
+         Set-ExecutionPolicy RemoteSigned -Force
+     ## Unix/MacOS:
+     		source .venv/bin/activate
+     
+   - Bước 3: Cài đặt các thư viện cần thiết
+     ## Install:
+     		pip install -r requirements.txt
+   - Bước 4: Chạy mã xử lý dữ liệu
+     ## Run:
+    		python app.py
 
-## Tech Stack
 
-### Backend
-- Python 3.11 + FastAPI
-- PostgreSQL
-- Redis (real-time)
-- JWT + OAuth2
-- SQLAlchemy + Alembic
+     Truy câp http://localhost:6868/docs
+     Truy câp http://localhost:9999/docs
 
-### Frontend
-- React 18 + TypeScript
-- Vite + TailwindCSS
-- Zustand / TanStack Query
-- Socket.IO client
-- WebRTC (peer-to-peer)
 
-### Real-time & Communication
-- Socket.IO (whiteboard, chat, notification)
-- WebRTC + simple-peer (video call)
-- Signal master (TURN/STUN server - optional)
 
-### DevOps & Deployment
-- Docker + Docker Compose
-- GitHub Actions (CI/CD)
-- Nginx (frontend static)
+## Create file .env in folder /src/.env
+    
+    # Flask settings
+    FLASK_ENV=development
+    SECRET_KEY=your_secret_key
+    
+    # SQL Server settings
+    DB_USER=sa
+    DB_PASSWORD=Aa@123456
+    DB_HOST=127.0.0.1
+    DB_PORT=1433
+    DB_NAME=FlaskApiDB
+    
+    
+    DATABASE_URI = "mssql+pymssql://sa:Aa%40123456@127.0.0.1:1433/FlaskApiDB"
 
-## Cấu trúc thư mục
+## pull image MS SQL server 
+    
+    ```bash
+    docker pull mcr.microsoft.com/mssql/server:2025-latest
+    ```
+## Install MS SQL server in docker 
+    ```bash
+    docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Aa123456" -p 1433:1433 --name sql1 --hostname sql1 -d  mcr.microsoft.com/mssql/server:2025-latest
+    ```
+## Test connect SQL server 
+
+## ORM Flask (from sqlalchemy.orm )
+Object Relational Mapping
+
+Ánh xạ 1 class (OOP)  model src/infrastructure/models --> Table in database 
+Ánh xạ các mối quan hệ (Relational) -- Khoá ngoại CSDL 
+(n-n): many to many 
+
+@startuml
+' Diagram Title
+title Clean Architecture Sequence Diagram
+
+' Define participants in order of appearance
+actor Actor
+participant "Web App"
+participant "Controller"
+participant "Services"
+participant "Domain"
+participant "infrastructure"
+database "Database"
+
+' --- Message Flow ---
+
+' 1. Initial Request
+Actor -> "Web App": Request
+activate "Web App"
+
+' 2. Forwarding to Controller
+"Web App" -> "Controller"
+activate "Controller"
+
+' 3. Calling the Service Layer
+"Controller" -> "Services"
+activate "Services"
+
+' 4. Interacting with the Domain Layer
+"Services" -> "Domain"
+activate "Domain"
+note over Domain: Interfaces
+
+' 5. Interacting with Infrastructure
+"Domain" -> "infrastructure"
+activate "infrastructure"
+note over infrastructure: Class implement
+
+' 6. Database Query
+"infrastructure" -> "Database"
+activate "Database"
+
+' --- Response Flow (Return Messages) ---
+
+' 7. Database returns data
+"Database" --> "infrastructure"
+deactivate "Database"
+
+' 8. Infrastructure returns to Domain
+"infrastructure" --> "Domain"
+deactivate "infrastructure"
+
+' 9. Domain returns to Services
+"Domain" --> "Services"
+deactivate "Domain"
+
+' 10. Services returns to Controller
+"Services" --> "Controller"
+deactivate "Services"
+
+' 11. Controller returns to Web App
+"Controller" --> "Web App"
+deactivate "Controller"
+
+' 12. Final data rendering to Actor
+"Web App" --> Actor
+note left of "Web App"
+  Render data
+end note
+deactivate "Web App"
+
+@enduml
+=======
