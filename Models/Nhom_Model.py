@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
 
@@ -10,7 +10,7 @@ class Nhom(db.Model):
     ten_nhom = db.Column(db.String(100), nullable=False)
     mo_ta = db.Column(db.Text)
     trang_thai = db.Column(db.String(20), default='dang_hoat_dong')
-    
+    ngay_tao = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     # Quan hệ
     truong_nhom_id = db.Column(db.String(50), db.ForeignKey('nhan_vien.id'))
     mon_hoc_id = db.Column(db.String(50), db.ForeignKey('mon_hoc.id'))
