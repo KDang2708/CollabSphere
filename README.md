@@ -166,20 +166,12 @@ npm run dev
 **Lưu ý**:  
 - Cập nhật các biến môi trường trong file `.env` (hoặc `.env.local`) của backend, ví dụ:
   ```
+  FLASK_ENV=development
   DATABASE_URL=postgresql://postgres:collabsphere25@db.bliuqusdfagtmniwhpsy.supabase.co:5432/postgres
   SECRET_KEY=dev_secret_key
   ```
 - Đảm bảo backend đang chạy trước khi khởi động frontend.
 
-## 📸 Demo & Screenshots
-
-*(Thay placeholder bằng ảnh thật của dự án khi có)*
-
-<p align="center">
-  <img src="https://via.placeholder.com/800x450.png?text=Kanban+Board+Screenshot" alt="Kanban Board" width="600"/>
-  <br/>
-  <img src="https://via.placeholder.com/800x450.png?text=Real-time+Whiteboard" alt="Whiteboard" width="600"/>
-</p>
 
 ## 🤝 Contributing
 
