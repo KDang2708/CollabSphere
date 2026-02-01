@@ -2,73 +2,189 @@
 **Hệ thống hỗ trợ học tập theo phương pháp Project-Based Learning (PBL)**  
 **A Unified Real-time Collaboration & Project Management Platform for Education**
 
-<img src="https://via.placeholder.com/1200x400.png?text=CollabSphere+Banner" alt="CollabSphere Banner" />
+<p align="center">
+  <img src="https://via.placeholder.com/1200x400.png?text=CollabSphere+Banner" alt="CollabSphere Banner" width="800"/>
+</p>
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11-blue)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-success)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](https://docker.com)
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.11-blue" alt="Python 3.11"></a>
+  <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.115-success" alt="FastAPI"></a>
+  <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-18-blue" alt="React 18"></a>
+</p>
 
 ## Giới thiệu dự án
-CollabSphere là hệ thống **all-in-one** giúp sinh viên và giảng viên quản lý, thực hiện đồ án môn học theo phương pháp **Project-Based Learning** mà không cần chuyển qua lại giữa nhiều công cụ rời rạc (Zoom, Trello, Miro, Google Docs, Slack…).
+**CollabSphere** là nền tảng **all-in-one** dành cho giáo dục, giúp sinh viên và giảng viên quản lý, thực hiện đồ án môn học theo phương pháp **Project-Based Learning (PBL)** mà không cần chuyển đổi liên tục giữa nhiều công cụ rời rạc (Zoom, Trello, Miro, Google Docs, Slack…).
 
-Tất cả trong một nơi:
-- Video call + Screen sharing  
-- Chat nhóm & chat trong meeting  
-- Bảng trắng (Whiteboard) cộng tác real-time  
-- Task board (Kanban) + Sprint + Subtask  
-- Quản lý milestone & checkpoint  
-- Đánh giá chéo (peer review) & góp ý từ giảng viên  
-- AI hỗ trợ gợi ý ý tưởng & sinh milestone  
-- Import Excel tự động (lớp, sinh viên, môn học…)
+Tất cả tính năng thiết yếu được tích hợp trong **một nơi duy nhất**, hỗ trợ làm việc nhóm thời gian thực.
 
-## Các vai trò trong hệ thống
-| Vai trò            | Mô tả ngắn gọn                              |
-|--------------------|---------------------------------------------|
-| **Admin**          | Quản trị toàn hệ thống                      |
-| **Staff**          | Nhập dữ liệu (môn, lớp, tài khoản) bằng Excel |
-| **Head Department**| Duyệt đề tài, phân bổ đề tài cho lớp        |
-| **Lecturer**       | Tạo đề tài, quản lý nhóm, chấm điểm         |
-| **Student**        | Làm việc nhóm, cập nhật tiến độ, đánh giá chéo |
+## ✨ Tính năng nổi bật
 
-## Tính năng chính
-| Module                              | Tính năng nổi bật                                                                 |
-|-------------------------------------|------------------------------------------------------------------------------------|
-| Subject & Class Management          | Import Excel → tự động tạo môn, lớp, tài khoản                                    |
-| Project Management                  | Tạo đề tài + AI sinh milestone tự động + duyệt đề tài                             |
-| Teams & Workspace                   | Kanban board, sprint, subtask, checkpoint, contribution tracking                 |
-| Real-time Communication            | Video call (WebRTC), chat nhóm, lịch họp, thông báo real-time                     |
-| Collaborative Tools                 | Whiteboard, đồng thời chỉnh sửa tài liệu                                         |
-| Resource Management                 | Upload/download tài liệu lớp và nhóm                                              |
-| Evaluation & Feedback               | Đánh giá nhóm/cá nhân, peer review, góp ý chi tiết                               |
-| AI-Powered Assistant                | Chatbot hỗ trợ ý tưởng, sinh thông tin đề tài                                     |
-| Notification System                 | Email + real-time notification (bell icon)                                        |
+- Video call + Screen sharing (WebRTC)
+- Chat nhóm & chat trong phòng họp
+- Bảng trắng (Whiteboard) cộng tác real-time
+- Task board Kanban + Sprint + Subtask + Checkpoint
+- Quản lý milestone, contribution tracking
+- Đánh giá chéo (peer review) & feedback chi tiết từ giảng viên
+- AI hỗ trợ gợi ý ý tưởng, tự động sinh milestone
+- Import dữ liệu lớp học, sinh viên, môn học từ Excel
+- Thông báo real-time (bell icon) & email
+- Upload/download tài liệu nhóm & lớp
 
-## Tech Stack
+## 🎯 Các vai trò trong hệ thống
+
+| Vai trò              | Mô tả chính                                      |
+|----------------------|--------------------------------------------------|
+| **Admin**            | Quản trị toàn hệ thống, cấu hình chung           |
+| **Staff**            | Nhập dữ liệu môn học, lớp, tài khoản bằng Excel  |
+| **Head Department**  | Duyệt đề tài, phân bổ đề tài cho lớp             |
+| **Lecturer**         | Tạo đề tài, quản lý nhóm, chấm điểm, feedback    |
+| **Student**          | Làm việc nhóm, cập nhật tiến độ, đánh giá chéo   |
+
+## 🛠️ Tech Stack
 
 ### Backend
-- Python 3.11 + FastAPI
-- PostgreSQL
-- Redis (real-time)
-- JWT + OAuth2
-- SQLAlchemy + Alembic
+- Python 3.11 + **FastAPI**
+- PostgreSQL (database)
+- Redis (real-time, cache, pub/sub)
+- SQLAlchemy + Alembic (ORM & migration)
+- JWT + OAuth2 (authentication)
 
 ### Frontend
 - React 18 + TypeScript
 - Vite + TailwindCSS
-- Zustand / TanStack Query
-- Socket.IO client
-- WebRTC (peer-to-peer)
+- Zustand / TanStack Query (state & data fetching)
+- Socket.IO client (real-time)
+- WebRTC + simple-peer (video call & screen sharing)
 
 ### Real-time & Communication
-- Socket.IO (whiteboard, chat, notification)
-- WebRTC + simple-peer (video call)
-- Signal master (TURN/STUN server - optional)
+- Socket.IO (chat, whiteboard, notification)
+- WebRTC (peer-to-peer video)
+- Optional: TURN/STUN server
 
-### DevOps & Deployment
-- Docker + Docker Compose
+### DevOps
 - GitHub Actions (CI/CD)
-- Nginx (frontend static)
+- Nginx (serve frontend static files in production)
 
-## Cấu trúc thư mục
+## 📂 Cấu trúc thư mục dự án
+
+```
+CollabSphere/
+├── backend/                      # FastAPI backend (Clean Architecture)
+│   ├── src/
+│   │   ├── api/                  # HTTP layer
+│   │   │   ├── controllers/      # Business logic handlers
+│   │   │   ├── routes/           # APIRouter definitions
+│   │   │   ├── schemas/          # Pydantic models (request/response)
+│   │   │   ├── middleware.py
+│   │   │   └── swagger.py
+│   │   │
+│   │   ├── domain/               # Core business logic (independent)
+│   │   │   ├── models/           # Entities & Value Objects
+│   │   │   ├── sinhvien/         # Domain modules
+│   │   │   ├── taikhoan/
+│   │   │   ├── constants.py
+│   │   │   └── exceptions.py
+│   │   │
+│   │   ├── infrastructure/       # External integrations
+│   │   │   ├── databases/        # DB session, connection
+│   │   │   └── repositories/     # Data access (CRUD)
+│   │   │
+│   │   ├── services/             # Application services / use-cases
+│   │   │
+│   │   ├── main.py               # FastAPI app entry
+│   │   ├── config.py
+│   │   └── dependencies.py
+│
+├── frontend/                     # React + Vite + TypeScript
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/               # Static files (images, icons…)
+│   │   ├── components/           # Reusable UI components
+│   │   │   ├── common/           # Button, Input, Card, Modal…
+│   │   │   └── layout/           # Header, Sidebar, Footer…
+│   │   │
+│   │   ├── pages/                # Main views / routes
+│   │   ├── hooks/                # Custom React hooks
+│   │   ├── stores/               # Zustand stores (nếu dùng)
+│   │   ├── services/             # API client (axios/fetch)
+│   │   ├── utils/
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   └── index.css
+│   
+├── .github/workflows/            # CI/CD pipelines (optional)
+├── .gitignore
+└── README.md
+```
+
+## 🚀 Getting Started (Development mode)
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- PostgreSQL (chạy local hoặc cloud như Supabase)
+- Redis (chạy local hoặc cloud)
+
+### Backend
+
+```bash
+cd backend
+
+# Tạo và kích hoạt virtual environment
+python -m venv venv
+
+# Windows:
+venv\Scripts\activate
+
+# Linux/macOS:
+# source venv/bin/activate
+
+cd src
+pip install -r ../requirements.txt
+
+# Chạy ứng dụng (giả sử entry point là app.py hoặc main.py)
+python app.py
+```
+
+→ API docs (Swagger): http://localhost:9999/docs (hoặc port bạn config trong app.py)
+
+### Frontend
+
+```bash
+cd frontend
+
+# Cài đặt dependencies
+npm install
+
+# Chạy dev server
+npm run dev
+```
+
+→ Frontend chạy tại: http://localhost:5173
+
+**Lưu ý**:  
+- Cập nhật các biến môi trường trong file `.env` (hoặc `.env.local`) của backend, ví dụ:
+  ```
+  FLASK_ENV=development
+  DATABASE_URL=postgresql://postgres:collabsphere25@db.bliuqusdfagtmniwhpsy.supabase.co:5432/postgres
+  SECRET_KEY=dev_secret_key
+  ```
+- Đảm bảo backend đang chạy trước khi khởi động frontend.
+
+
+## 🤝 Contributing
+
+1. Fork dự án
+2. Tạo branch feature: `git checkout -b feature/amazing-feature`
+3. Commit thay đổi: `git commit -m 'Add some amazing feature'`
+4. Push branch: `git push origin feature/amazing-feature`
+5. Mở Pull Request
+
+## 📄 License
+
+Distributed under the **MIT License**. Xem file [LICENSE](LICENSE) để biết chi tiết.
+
+Cảm ơn bạn đã quan tâm đến **CollabSphere**!  
+Hy vọng dự án sẽ hỗ trợ hiệu quả cho việc học tập theo dự án tại Việt Nam và quốc tế. 🌟
+```
