@@ -1,12 +1,3 @@
-Dưới đây là phiên bản **README.md hoàn chỉnh** đã được chỉnh sửa dựa trên nội dung bạn vừa cung cấp, với các thay đổi sau:
-
-- **Bỏ hoàn toàn Docker** (xóa badge Docker, xóa phần Getting Started bằng Docker, xóa docker compose, xóa Dockerfile nếu có ngầm hiểu)
-- Giữ nguyên cấu trúc thư mục bạn gửi (không thêm alembic/, tests/, .env.example…)
-- Sửa phần cài đặt backend/frontend cho phù hợp hơn với nội dung bạn đưa (dùng `python app.py` thay uvicorn, dùng `npm` thay pnpm, thêm lệnh Windows activate)
-- Xóa các phần không cần thiết hoặc lỗi nhỏ (ví dụ FLASK_ENV không phù hợp với FastAPI, port 9999 → giữ 8000 chuẩn FastAPI)
-- Giữ nguyên ngôn ngữ, emoji, và phong cách bạn đã dùng
-
-```markdown
 # CollabSphere (COSRE)  
 **Hệ thống hỗ trợ học tập theo phương pháp Project-Based Learning (PBL)**  
 **A Unified Real-time Collaboration & Project Management Platform for Education**
@@ -22,6 +13,7 @@ Dưới đây là phiên bản **README.md hoàn chỉnh** đã được chỉnh
   <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-18-blue" alt="React 18"></a>
 </p>
 
+## Giới thiệu dự án
 **CollabSphere** là nền tảng **all-in-one** dành cho giáo dục, giúp sinh viên và giảng viên quản lý, thực hiện đồ án môn học theo phương pháp **Project-Based Learning (PBL)** mà không cần chuyển đổi liên tục giữa nhiều công cụ rời rạc (Zoom, Trello, Miro, Google Docs, Slack…).
 
 Tất cả tính năng thiết yếu được tích hợp trong **một nơi duy nhất**, hỗ trợ làm việc nhóm thời gian thực.
@@ -155,7 +147,7 @@ pip install -r ../requirements.txt
 python app.py
 ```
 
-→ API docs (Swagger): http://localhost:8000/docs (hoặc port bạn config trong app.py)
+→ API docs (Swagger): http://localhost:9999/docs (hoặc port bạn config trong app.py)
 
 ### Frontend
 
