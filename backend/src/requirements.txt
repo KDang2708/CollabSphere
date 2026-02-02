@@ -8,6 +8,9 @@ python-dotenv>=0.21
 Flask-RESTX>=1.1.0 
 flasgger
 fastapi
+uvicorn[standard]
+PyJWT
 apispec
 apispec_webframeworks
 flask-swagger-ui
+psycopg2-binary

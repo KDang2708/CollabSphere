@@ -14,5 +14,5 @@ class CuocHopORM(Base):
     id = Column(String, primary_key=True , default=lambda:str(uuid.uuid4()))          # cột ID, kiểu String, là khóa chính
     thoi_gian_bat_dau = Column(DateTime)           # cột thời gian bắt đầu, kiểu DateTime
     id_nguoi_tao = Column(String)                   # cột ID người tạo, kiểu String
-    id_lop_hoc = Column(String , ForeignKey("lop_hoc"))                     # cột ID lớp học, kiểu String
-    id_nhom = Column(String,ForeignKey("nhom") ,  nullable=True)                        # cột ID nhóm, kiểu String
+    id_lop_hoc = Column(String , ForeignKey("lop_hoc.id"))                     # cột ID lớp học, kiểu String
+    id_nhom = Column(String,ForeignKey("nhom.id") ,  nullable=True)                        # cột ID nhóm, kiểu String

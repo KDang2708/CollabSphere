@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+
 class NhanTinResponse(BaseModel):
     id_tin_nhan: str
     noi_dung: str

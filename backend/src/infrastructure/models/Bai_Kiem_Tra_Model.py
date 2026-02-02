@@ -13,5 +13,5 @@ class BaiKiemTraORM(Base):
     id = Column(String, primary_key=True , default=lambda : str(uuid.uuid4()))      # cột ID, kiểu String, là khóa chính
     tieu_de = Column(String, nullable = False)
     de_kiem_tra = Column(String)                # cột đề kiểm tra, kiểu String
-    id_mon_hoc = Column(String , ForeignKey("mon_hoc"))                 # cột ID môn học liên kết, kiểu String
+    id_mon_hoc = Column(String , ForeignKey("mon_hoc.id"))                 # cột ID môn học liên kết, kiểu String
     # id_lop_hoc = Column(String , ForeignKey("lop_hoc"))     # ko cần 

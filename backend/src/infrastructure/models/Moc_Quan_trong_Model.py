@@ -14,6 +14,6 @@ class MocQuanTrongORM(Base):
 
     id = Column(String, primary_key=True , default=lambda:str(uuid.uuid4()))      # cột ID, kiểu String, là khóa chính
     noi_dung = Column(String)                   # cột nội dung mốc quan trọng, kiểu String
-    id_mon_hoc = Column(String, ForeignKey("mon_hoc") )                 # cột ID môn học liên kết, kiểu String
+    id_mon_hoc = Column(String, ForeignKey("mon_hoc.id") )                 # cột ID môn học liên kết, kiểu String
     loai_moc = Column(String)                   # cột loại mốc quan trọng, kiểu String
     

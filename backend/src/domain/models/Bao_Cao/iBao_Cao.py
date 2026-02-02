@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from domain.models.Bao_Cao.Bao_Cao import BaoCao
 from domain.models.Giang_Vien.Giang_Vien import GiangVien
-from domain.models.Sinh_Vien.Sinh_Vien import HocSinh
+from domain.models.Sinh_Vien.Sinh_Vien import SinhVien
 from domain.models.Nhan_Vien.Nhan_Vien import NhanVien
 from domain.models.Truong_Khoa.Truong_Khoa import TruongKhoa
 from domain.models.Phan_Hoi.Phan_Hoi import PhanHoi

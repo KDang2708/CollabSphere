@@ -13,4 +13,4 @@ class NhanVienORM(Base):
 
     id = Column(String, primary_key=True , default=lambda :str(uuid.uuid4()))  # cột ID, kiểu String, là khóa chính
     ten = Column(String)                   # cột tên nhân viên, kiểu String
-    id_tai_khoan = Column(String , ForeignKey("tai_khoan"))          # cột ID tài khoản liên kết, kiểu String
+    id_tai_khoan = Column(String , ForeignKey("tai_khoan.id"))          # cột ID tài khoản liên kết, kiểu String

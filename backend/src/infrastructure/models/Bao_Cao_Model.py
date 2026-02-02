@@ -10,5 +10,5 @@ class BaoCaoORM(Base):
     ngay_gui = Column(DateTime , server_default=func.now())
     id_nguoi_gui = Column(String)
     vai_tro_nguoi_gui = Column(String)
-    id_phan_hoi = Column(String , ForeignKey("phan_hoi") , nullable=True  )
+    id_phan_hoi = Column(String , ForeignKey("phan_hoi.id") , nullable=True  )
 

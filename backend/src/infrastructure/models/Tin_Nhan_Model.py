@@ -23,5 +23,5 @@ class TinNhanORM(Base):
     id_nguoi_gui = Column(String)                     # cột ID người gửi, kiểu String
     vai_tro_nguoi_gui = Column(String)
     thoi_gian_gui = Column(DateTime, server_default=func.now())                  # cột thời gian gửi, kiểu DateTime
-    id_lop_hoc = Column(String , ForeignKey("lop_hoc"))                       # cột ID lớp học liên kết, kiểu String
-    id_nhom = Column(String, ForeignKey("nhom"), nullable=True )           # cột ID nhóm liên kết, kiểu String, có thể null
+    id_lop_hoc = Column(String , ForeignKey("lop_hoc.id"))                       # cột ID lớp học liên kết, kiểu String
+    id_nhom = Column(String, ForeignKey("nhom.id"), nullable=True )           # cột ID nhóm liên kết, kiểu String, có thể null

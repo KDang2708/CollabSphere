@@ -14,5 +14,5 @@ class NhanXetORM(Base):
 
     id = Column(String , primary_key=True , default=lambda : str(uuid.uuid4()))
     noi_dung_nhan_xet = Column(String)
-    id_giang_vien = Column(String , ForeignKey("giang_vien"))
-    id_bai_lam = Column(String, ForeignKey("bai_lam"))
+    id_giang_vien = Column(String , ForeignKey("giang_vien.id"))
+    id_bai_lam = Column(String, ForeignKey("bai_lam.id"))

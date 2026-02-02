@@ -15,5 +15,5 @@ class DuAnORM(Base):
     id = Column(String, primary_key=True , default=lambda:str(uuid.uuid4()))      # cột ID, kiểu String, là khóa chính
     noi_dung = Column(String)                   # cột nội dung dự án, kiểu String
     trang_thai = Column(Boolean , default=False)                # cột trạng thái dự án, kiểu Boolean
-    id_nguoi_tao = Column(String , ForeignKey("giang_vien"))               # cột ID người tạo dự án, kiểu String
+    id_nguoi_tao = Column(String , ForeignKey("giang_vien.id"))               # cột ID người tạo dự án, kiểu String
     id_lop_hoc = Column(String, nullable=True)
