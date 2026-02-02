@@ -10,7 +10,8 @@ class XemLopHocUseCase():
         self.repo_mon_hoc = mon_hoc
     def execute(self)->list[LopHoc]:
         return self.repo_lop_hoc.get_all()
-    def xem_chi_tiet(self, lop_hoc : LopHoc)->LopHoc:
+    def xem_chi_tiet(self, id_lop_hoc : str)->LopHoc:
+        lop_hoc = self.repo_lop_hoc.get_by_id(id_lop_hoc)
         lop_hoc.danh_sach_hoc_sinh = self.repo_lop_hoc.get_sinh_vien(lop_hoc) # tra về danh sách sinh viên
         # lop_hoc.danh_sach_nhom = self.repo_nhom.get_nhom_theo_lop(lop_hoc) # trả về danh sách nhóm của lớp
         return lop_hoc

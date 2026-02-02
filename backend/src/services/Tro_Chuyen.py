@@ -1,26 +1,39 @@
 from domain.models.Tin_Nhan.Tin_Nhan import TinNhan
 from domain.models.Tin_Nhan.iTin_Nhan import ITinNhanRepository
-from domain.models.Sinh_Vien.Sinh_Vien import SinhVien
-from domain.models.Giang_Vien.Giang_Vien import GiangVien
+from domain.models.Sinh_Vien.iSinh_Vien import ISinhVienRepository
+from domain.models.Giang_Vien.iGiang_Vien import IGiangVienRepository
 from domain.models.Lop_Hoc.Lop_Hoc import LopHoc
 from domain.models.Nhom.Nhom import Nhom
-
+from domain.models.Lop_Hoc.iLop_Hoc import ILopHocRepository
+from domain.models.Nhom.iNhom import INhomRepository
 class TroChuyenLopUseCase():
-    def __init__(self , tin_nhan : ITinNhanRepository):
+    def __init__(self , nhom : INhomRepository , tin_nhan : ITinNhanRepository , sinh_vien : ISinhVienRepository , giang_vien : IGiangVienRepository , lop_hoc : ILopHocRepository):
         self.repo_tin_nhan = tin_nhan
-    def nhan_tin(self , noi_dung : str, nguoi_gui : SinhVien |GiangVien , lop_hoc : LopHoc , nhom : Nhom|None)->TinNhan:
+        self.repo_sinh_vien = sinh_vien
+        self.repo_giang_vien = giang_vien
+        self.repo_lop_hoc = lop_hoc
+        self.repo_nhom = nhom
+    def nhan_tin(self , noi_dung : str , vai_tro_nguoi_gui :int , id_nguoi_gui : str , id_lop_hoc : str , id_nhom : str|None)->TinNhan:
+        if vai_tro_nguoi_gui ==0:
+            nguoi_gui = self.repo_sinh_vien.get_by_id(id_nguoi_gui)
+        else:
+            nguoi_gui = self.repo_giang_vien.get_by_id(id_nguoi_gui)
+        lop_hoc = self.repo_lop_hoc.get_by_id(id_lop_hoc)
         tin_nhan = TinNhan(
             nguoi_gui=nguoi_gui,
             noi_dung=noi_dung,
             lop_hoc=lop_hoc,
-            nhom=nhom
+            nhom=self.repo_nhom.get_by_id(id_nhom)
         )
         tin_nhan=self.repo_tin_nhan.add(tin_nhan)
         return tin_nhan
-    def xem_tin_lop(self , lop_hoc : LopHoc)->list[TinNhan]:
+    def xem_tin_lop(self , id_lop_hoc : str)->list[TinNhan]:
+        lop_hoc = self.repo_lop_hoc.get_by_id(id_lop_hoc)
         dsTN = self.repo_tin_nhan.get_tin_nhan_lop(lop_hoc)
         return dsTN
-    def xem_tin_nhom(self , lop_hoc : LopHoc , nhom : Nhom)->list[TinNhan]:
+    def xem_tin_nhom(self , id_lop_hoc : str , id_nhom : str)->list[TinNhan]:
+        nhom = self.repo_nhom.get_by_id(id_nhom)
+        lop_hoc = self.repo_lop_hoc.get_by_id(id_lop_hoc)
         dsTN = self.repo_tin_nhan.get_tin_nhan_nhom(lop_hoc , nhom)
         return dsTN
 

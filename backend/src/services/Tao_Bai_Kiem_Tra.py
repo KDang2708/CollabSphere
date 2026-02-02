@@ -1,11 +1,14 @@
 from domain.models.Bai_Kiem_Tra.Bai_Kiem_Tra import BaiKiemTra
 from domain.models.Bai_Kiem_Tra.iBai_Kiem_Tra import IBaiKiemTraRepository
 from domain.models.Mon_Hoc.Mon_Hoc import MonHoc
+from domain.models.Mon_Hoc.iMon_Hoc import IMonHocRepository
 
 class TaoBaiKiemTraUseCase():
-    def __init__(self, bai_kiem_tra : IBaiKiemTraRepository):
+    def __init__(self, bai_kiem_tra : IBaiKiemTraRepository, mon_hoc : IMonHocRepository):
         self.repo_bai_kiem_tra = bai_kiem_tra
-    def execute(self , tieu_de :str , de_kiem_tra : str , mon_hoc : MonHoc)->BaiKiemTra:
+        self.repo_mon_hoc = mon_hoc
+    def execute(self , tieu_de :str , de_kiem_tra : str , id_mon_hoc : str)->BaiKiemTra:
+        mon_hoc = self.repo_mon_hoc.get_by_id(id_mon_hoc)
         bai_kiem_tra = BaiKiemTra(
             tieu_de=tieu_de,
             de_kiem_tra=de_kiem_tra,

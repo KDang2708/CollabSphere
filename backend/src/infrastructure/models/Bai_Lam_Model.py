@@ -16,6 +16,6 @@ class BaiLamORM(Base):
 
     id = Column(String, primary_key=True , default=lambda:str(uuid.uuid4()))              # cột ID, kiểu String, là khóa chính
     noi_dung_bai_lam = Column(String)                  # cột nội dung bài làm, kiểu String
-    loai_bai_lam = Column(String)    # 0 là bài kiểm tra, 1 là nhiệm vụ
-    id_bai_kiem_tra = Column(String , ForeignKey("bai_kiem_tra.id"))               # cột ID bài kiểm tra hoặc nhiệm vụ liên kết, kiểu String
-    id_sinh_vien_thuc_hien = Column(String, ForeignKey("sinh_vien.id"))           # cột ID sinh viên thực hiện, kiểu String
+    loai_bai_lam = Column(int)    # 0 là bài kiểm tra, 1 là nhiệm vụ
+    id_bai_kiem_tra = Column(String , ForeignKey("bai_kiem_tra"))               # cột ID bài kiểm tra hoặc nhiệm vụ liên kết, kiểu String
+    id_sinh_vien_thuc_hien = Column(String, ForeignKey("sinh_vien"))           # cột ID sinh viên thực hiện, kiểu String

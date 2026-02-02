@@ -8,7 +8,8 @@ class PhanHoiUseCase():
         self.repo_bao_cao = bao_cao
         self.repo_phan_hoi = phan_hoi
     
-    def execute(self, bao_cao : BaoCao, noi_dung : str) -> PhanHoi:
+    def execute(self, id_bao_cao : str , noi_dung : str) -> PhanHoi:
+        bao_cao = self.repo_bao_cao.get_by_id(id_bao_cao)
         phan_hoi = PhanHoi(bao_cao=bao_cao,noi_dung=noi_dung)
         phan_hoi = self.repo_phan_hoi.add(phan_hoi)
         bao_cao = self.repo_bao_cao.set_phan_hoi(phan_hoi.id,bao_cao.id)

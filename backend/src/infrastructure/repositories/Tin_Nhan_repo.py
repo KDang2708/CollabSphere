@@ -31,7 +31,7 @@ class TinNhanRepository(ITinNhanRepository):
         return tin_nhan
     def get_tin_nhan_lop(self, lop_hoc:LopHoc)->list[TinNhan]:
         orm_list = self.session.query(TinNhanORM).filter(TinNhanORM.id_lop_hoc==lop_hoc.id , TinNhanORM.id_nhom==None).order_by(TinNhanORM.thoi_gian_gui.asc()).all()
-        dsTN :list[TinNhan] = []
+        dsTN : list[TinNhan] = []
         for orm in orm_list:
             if orm.vai_tro_nguoi_gui == VaiTro.GIANG_VIEN:
                 nguoi_gui = self.repo_giang_vien.get_by_id(orm.id_nguoi_gui)

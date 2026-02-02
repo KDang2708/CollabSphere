@@ -2,7 +2,7 @@ from domain.models.Du_An.Du_An import DuAn
 from domain.models.Du_An.iDu_An import IDuAn
 # from services.Xem_Du_An import XemDuAnUseCase
 
-class DuyetDuAnUsseCase():
+class DuyetDuAnUseCase():
     def __init__(self, du_an : IDuAn):
         self.repo_du_an = du_an
     def xem_du_an(self)->list[DuAn]:

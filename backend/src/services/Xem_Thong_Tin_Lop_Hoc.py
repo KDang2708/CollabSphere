@@ -13,8 +13,9 @@ class XemThongTinLopHocUseCase():
         self.repo_moc_quan_trong = moc_quan_trong
         self.repo_bai_kiem_tra = bai_kiem_tra
         
-    def execute(self , lop_hoc : LopHoc)->LopHoc: # lớp học truyền vào chỉ có id , giáo viên , môn học
+    def execute(self , id_lop_hoc : str)->LopHoc: # lớp học truyền vào chỉ có id , giáo viên , môn học
         # lấy ra các mốc quan trọng , lấy ra các bài kiểm tra , lấy ra danh sách sinh viên
+        lop_hoc = self.repo_lop_hoc.get_by_id(id_lop_hoc)
         mon_hoc = lop_hoc.mon_hoc
         ds_moc_quan_trong = self.repo_moc_quan_trong.get_by_mon_hoc(mon_hoc)
         ds_bai_kiem_tra = self.repo_bai_kiem_tra.get_by_mon_hoc(mon_hoc)

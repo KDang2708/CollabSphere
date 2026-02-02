@@ -45,6 +45,6 @@ class TaiKhoanController:
             )
         except ValueError as e:
             raise HTTPException(
-                ma_loi=status.HTTP_400_BAD_REQUEST,
-                chi_tiet=str(e)
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=str(e)
             )

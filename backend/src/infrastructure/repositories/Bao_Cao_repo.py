@@ -3,12 +3,13 @@ from infrastructure.models.Bao_Cao_Model import BaoCaoORM
 from domain.models.Bao_Cao.iBao_Cao import IBaoCaoRepository
 from domain.models.Tai_Khoan.Tai_Khoan import VaiTro , TaiKhoan
 from domain.models.Phan_Hoi.Phan_Hoi import PhanHoi
+from domain.models.Tai_Khoan.iTai_Khoan import ITaiKhoanRepository
 from sqlalchemy.orm import Session
 
 class BaoCaoRepository(IBaoCaoRepository):
-    def __init__(self, session : Session):
+    def __init__(self, session : Session , tai_khoan : ITaiKhoanRepository):
         self.session = session
-
+        self.repo_tai_khoan = tai_khoan
     def add(self, bao_cao: BaoCao) -> BaoCao:
         orm = BaoCaoORM( 
                         noi_dung=bao_cao.noi_dung, 
@@ -22,13 +23,7 @@ class BaoCaoRepository(IBaoCaoRepository):
         return bao_cao
 
     def _to_domain(self, orm: BaoCaoORM) -> BaoCao:
-        nguoi_gui = TaiKhoan(
-            id=orm.id_nguoi_gui,
-            vai_tro=VaiTro(orm.vai_tro_nguoi_gui),
-            ten_dang_nhap=None,
-            trang_thai=None
-        )
-
+        nguoi_gui = self.repo_tai_khoan.get_by_id(orm.id_nguoi_gui)
         return BaoCao(
             id=orm.id,
             noi_dung=orm.noi_dung,
@@ -46,7 +41,7 @@ class BaoCaoRepository(IBaoCaoRepository):
     def get_by_id(self, id: str) -> BaoCao | None:
         orm : BaoCaoORM = self.session.query(BaoCaoORM).filter_by(id=id).first()
         if orm is None:
-            return None
+            raise Exception("Báo cáo không tồn tại!")
         return self._to_domain(orm)
     
     def set_phan_hoi(self, phan_hoi: PhanHoi, bao_cao: BaoCao) -> bool:

@@ -59,3 +59,16 @@ class DuAnRepository(IDuAn):
         du_an.trang_thai = orm.trang_thai
         self.session.commit()
         return du_an
+    def get_by_id(self, id_du_an : str)->DuAn:
+        orm = self.session.query(DuAnORM).filter(DuAnORM.id == id_du_an).first()
+        if orm is None:
+            raise Exception("Id dự án không tồn tại !")
+        nguoi_tao = self.repo_giang_vien(orm.id_nguoi_tao)
+        lop_hoc = self.repo_lop_hoc(orm.id_lop_hoc)
+        return DuAn(
+            id=orm.id,
+            noi_dung=orm.noi_dung,
+            nguoi_tao = nguoi_tao,
+            lop_hoc=lop_hoc,
+            trang_thai=orm.trang_thai
+        )
