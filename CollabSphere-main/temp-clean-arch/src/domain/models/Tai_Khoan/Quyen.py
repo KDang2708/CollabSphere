@@ -1,0 +1,9 @@
+from enum import Enum
+
+class Quyen(Enum):
+    DOC_BAO_CAO = "DOC_BAO_CAO"
+    VIET_PHAN_HOI = "VIET_PHAN_HOI"
+    XEM_TAI_KHOAN = "XEM_TAI_KHOAN"
+    KHOA_TAI_KHOAN = "KHOA_TAI_KHOAN"
+    MO_TAI_KHOAN = "MO_TAI_KHOAN"
+    XOA_TAI_KHOAN = "XOA_TAI_KHOAN"
